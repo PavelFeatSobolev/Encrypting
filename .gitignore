@@ -1,0 +1,15 @@
+# special files
+.htsecure
+/.htaccess
+
+
+# IDS etc.
+.DS_Store
+Thumbs.db
+web.config
+/nbproject/
+/.idea/
+!/BitrixCodeStyle.xml
+
+
+
