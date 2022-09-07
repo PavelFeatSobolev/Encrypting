@@ -10,6 +10,3 @@ $crypt = $encrypting->encryptionData('Шифруемая строка');
 $encryptingDec = new \Lib\Encrypting\OpenSSLSymmetric();
 $result = $encryptingDec->decryptionData($crypt);
 
-var_dump($result);
-
-

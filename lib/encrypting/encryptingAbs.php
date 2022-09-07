@@ -2,10 +2,9 @@
 
 namespace Lib\Encrypting;
 
-use Lib\Encrypting\Interfaces\EncryptingInterface;
 use Lib\Encrypting\Exceptions;
 
-abstract class EncryptingAbs implements EncryptingInterface
+abstract class EncryptingAbs
 {
     protected array $options;
     protected const CONFIG_KEY = '';
@@ -17,20 +16,26 @@ abstract class EncryptingAbs implements EncryptingInterface
      *
      * @throws Exceptions\EncryptingException
      */
-    public function __construct()
+    protected function __construct()
     {
-        $this->options = $this->loadingArrayConfigByKey(static::CONFIG_KEY);
+        $this->loadingArrayConfigByKey(static::CONFIG_KEY);
     }
 
-    protected function loadingArrayConfigByKey(string $key): array
+    /**
+     * Method get params from configuration file
+     *
+     * @param string $key
+     *
+     * @throws Exceptions\EncryptingException
+     */
+    private function loadingArrayConfigByKey(string $key)
     {
         $allOptions = require __DIR__ . '\config.php';
         if (empty($allOptions[$key]) || !is_array($allOptions[$key])) {
-            throw new Exceptions\EncryptingException('Error read file  configurations ' .
+            throw new Exceptions\EncryptingException('Error read file  configurations! ' .
                 __CLASS__ . ' ' . __METHOD__ . " line " . __LINE__);
         }
-
-        return $allOptions[$key];
+        $this->options = $allOptions[$key];
     }
 
     /**
@@ -60,4 +65,22 @@ abstract class EncryptingAbs implements EncryptingInterface
         }
         return false;
     }
+
+    /**
+     * Method encryption data
+     *
+     * @param string $data
+     *
+     * @return mixed
+     */
+    abstract public function encryptionData(string $data);
+
+    /**
+     * Method decryption data
+     *
+     * @param string $data
+     *
+     * @return mixed
+     */
+    abstract public function decryptionData(string $data);
 }
