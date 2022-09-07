@@ -11,8 +11,6 @@ $crypt = $encrypting->encryptionData('Шифруемые данные');
 $encryptingDec = new \Lib\Encrypting\OpenSSLSymmetric();
 $result = $encryptingDec->decryptionData($crypt);
 
-var_dump(result);
-
 //если необходимо динамически изменить параметры конфигурации
 $encrypting = new \Lib\Encrypting\OpenSSLSymmetric();
 $encrypting->setOptionsParam('ключ','значение');
